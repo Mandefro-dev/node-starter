@@ -1,0 +1,21 @@
+{
+  "name": "nodex",
+  "version": "1.0.0",
+  "description": "\"# nodex\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mandefro-dev/node-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mandefro-dev/node-starter/issues"
+  },
+  "homepage": "https://github.com/Mandefro-dev/node-starter#readme"
+}
