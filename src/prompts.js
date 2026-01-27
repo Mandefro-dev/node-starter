@@ -16,7 +16,7 @@ export async function promptMissingOptions(options) {
       },
     });
   }
-  if (!options.template) {
+  if (!options.language) {
     questions.push({
       type: "list",
       name: "language",
@@ -95,7 +95,7 @@ export async function promptMissingOptions(options) {
   return {
     ...options,
     projectName: options.projectName || answers.projectName,
-    language: options.projectName || answers.langauge,
+    language: options.language || answers.langauge,
     pkgManager: answers.pkgManager,
     architecture: answers.architecture,
     dbType: answers.dbType,

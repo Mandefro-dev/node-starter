@@ -21,7 +21,7 @@ export async function cli(args) {
 
   let rawOptions = {
     projectName: projectNameArgs,
-    template: options.template,
+    language: options.template,
   };
 
   const finalOptions = await promptMissingOptions(rawOptions);
