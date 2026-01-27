@@ -12,78 +12,78 @@ export async function promptMissingOptions(options) {
       default: "my-app",
       validate: (input) => {
         if (/^([a-z\-\_\d])+$/.test(input)) return true;
-        return "Project name may only include lower-case letters,numbers,underscores and hashes.";
+        return "Project name may only include lower-case letters, numbers, underscores and hashes.";
       },
     });
   }
+
   if (!options.language) {
     questions.push({
       type: "list",
       name: "language",
-      message: "Which language will u use",
-      choices: ["Javascript", "TypeScript"],
+      message: "Which language will you use?",
+      choices: ["JavaScript", "TypeScript"],
       default: defaultTemplate,
     });
   }
+
   questions.push({
     type: "list",
     name: "pkgManager",
-    message: "Which package Manager do u perefer to use?",
+    message: "Which package manager do you prefer?",
     choices: ["npm", "yarn", "pnpm"],
     default: "npm",
   });
+
   questions.push({
     type: "list",
     name: "architecture",
-    message: "What architectural style do u want?",
+    message: "What architectural style do you want?",
     choices: [
-      { name: "Simple api(all in one folder)", value: "simple" },
-      { name: "MVC-standard", value: "mvc" },
-      { clean: "Clean", value: "clean" },
+      { name: "Simple API (all in one folder)", value: "simple" },
+      { name: "MVC Standard", value: "mvc" },
+      { name: "Clean Architecture", value: "clean" },
     ],
     default: "mvc",
   });
+
   questions.push({
     type: "list",
     name: "dbType",
-    message: "Which database are you gonna use?",
-    choices: ["None", "Mongodb", "PostgreSQl", "mySQL"],
+    message: "Which database are you going to use?",
+    choices: ["None", "MongoDB", "PostgreSQL", "MySQL"],
     default: "None",
   });
-  //TODO:ask if  they picked sql, orm selection
+
   questions.push({
     type: "list",
     name: "orm",
-    message: "Whcih ORM do you want to use?",
-    choices: ["Prisma", "Squelize", "TypeORM"],
+    message: "Which ORM do you want to use?",
+    choices: ["Prisma", "Sequelize", "TypeORM"],
     default: "Prisma",
     when: (answers) =>
-      answers.dbType === "PostgreSQL" || answers.dbType === "mySQL",
+      answers.dbType === "PostgreSQL" || answers.dbType === "MySQL",
   });
-  //add authentication layer later
+
   questions.push({
     type: "confirm",
     name: "auth",
-    message: "Do u need authentication?",
+    message: "Do you need authentication?",
     default: false,
   });
-  //TODO:this one is kinda advanced ... wil check it later
 
   questions.push({
     type: "checkbox",
     name: "tools",
-    message: "Select additonal tools to configure",
+    message: "Select additional tools to configure",
     choices: [
-      { name: "Docker(Dockerfile and docker-compose)", vaule: "docker" },
-      { name: "Linting & formating(Eslint + prettier)", value: "lint" },
-      {
-        name: "Unit testing(jest)",
-        value: "jest",
-      },
-      { name: "Validation(joi/zod)", value: "validation" },
+      { name: "Docker (Dockerfile)", value: "docker" },
+      { name: "Linting & Formatting", value: "lint" },
+      { name: "Unit Testing (Jest)", value: "jest" },
+      { name: "Validation (Joi/Zod)", value: "validation" },
     ],
   });
-  //init git repo
+
   questions.push({
     type: "confirm",
     name: "git",
@@ -92,16 +92,17 @@ export async function promptMissingOptions(options) {
   });
 
   const answers = await inquirer.prompt(questions);
+
   return {
     ...options,
     projectName: options.projectName || answers.projectName,
-    language: options.language || answers.langauge,
+    language: options.language || answers.language,
     pkgManager: answers.pkgManager,
     architecture: answers.architecture,
     dbType: answers.dbType,
     orm: answers.orm || (answers.dbType === "MongoDB" ? "mongoose" : null),
     auth: answers.auth,
-    tools: answers.tools,
+    tools: answers.tools || [],
     git: answers.git,
   };
 }

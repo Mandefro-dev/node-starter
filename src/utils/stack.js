@@ -10,7 +10,7 @@ export function getTemplateStack(options) {
   const stack = [];
 
   const langSuffix = options.language === "TypeScript" ? "ts" : "js";
-  const archPrefix = options.architecture === "simple" ? "simple" : "mvc";
+  const archPrefix = options.architecture;
 
   stack.push(path.join(TEMPLATE_ROOT, `_base-${archPrefix}-${langSuffix}`));
 
@@ -24,11 +24,9 @@ export function getTemplateStack(options) {
     stack.push(path.join(TEMPLATE_ROOT, `_auth-jwt-${langSuffix}`));
   }
 
-  if (options.tools.includes("docker")) {
+  if (options.tools && options.tools.includes("docker")) {
     stack.push(path.join(TEMPLATE_ROOT, "_tool-docker"));
   }
-
-  // You can add more tools like CI/CD github actions here
 
   return stack;
 }
