@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 
 export async function promptMissingOptions(options) {
-  const defaultTemplate = "JavaScript";
+  const defaultTemplate = "TypeScript";
   const questions = [];
 
   if (!options.projectName) {
@@ -74,8 +74,8 @@ export async function promptMissingOptions(options) {
     name: "tools",
     message: "Select additonal tools to configure",
     choices: [
-      { name: "Docker(Dockerfile and docker-compose", vaule: "docker" },
-      { name: "Linting & formating(Eslint + prettier", value: "lint" },
+      { name: "Docker(Dockerfile and docker-compose)", vaule: "docker" },
+      { name: "Linting & formating(Eslint + prettier)", value: "lint" },
       {
         name: "Unit testing(jest)",
         value: "jest",

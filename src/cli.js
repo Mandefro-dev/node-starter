@@ -3,6 +3,7 @@ import { promptMissingOptions } from "./prompts.js";
 import { showWelcomeBanner, showPlan } from "./ui.js";
 import inquirer from "inquirer";
 import chalk from "chalk";
+import { createProject } from "./core/generator.js";
 export async function cli(args) {
   showWelcomeBanner();
   await new Promise((r) => setTimeout(r, 500));
@@ -32,4 +33,5 @@ export async function cli(args) {
     message: "Press Enter to confirm or Ctrl+C to cancel.",
   });
   console.log(chalk.green("Initializing construction..."));
+  await createProject(finalOptions);
 }
