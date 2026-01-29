@@ -2,6 +2,8 @@ import fs from "fs-extra";
 import path from "path";
 import ora from "ora";
 import chalk from "chalk";
+import ejs from "ejs";
+import { glob } from "glob";
 import { getTemplateStack } from "../utils/stack.js";
 
 export async function createProject(options) {
@@ -26,6 +28,20 @@ export async function createProject(options) {
       if (!fs.existsSync(templatePath)) {
         spinner.warn(`Skipping missing template layer: ${folderName}`);
         continue;
+      }
+      spinner.start(`Applying layer: ${chalk.cyan(folderName)}...`);
+
+      const files = await glob("**/*", {
+        cwd: templatePath,
+        nodir: true,
+        dot: true,
+      });
+      for (const file of files) {
+        const sourcePath = path.join(templatePath, file);
+        const destRelative = file.replace("ejs", "");
+        const destPath = path.join(targetDir, destRelative);
+
+        //TODO:  to finsih tommorow
       }
 
       await fs.copy(templatePath, targetDir, {
