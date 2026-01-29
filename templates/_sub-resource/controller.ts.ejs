@@ -1,0 +1,11 @@
+import { Request, Response, NextFunction } from 'express';
+import { <%= name.pascal %>Service } from '../services/<%= name.lower %>.service';
+
+export const get<%= name.pascal %>s = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const data = await <%= name.pascal %>Service.findAll();
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    next(error);
+  }
+};

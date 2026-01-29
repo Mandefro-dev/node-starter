@@ -19,6 +19,12 @@ export async function cli(args) {
     .argument("[projectName]", "name of the project")
     .option("-t, --template <type>", "specify langauge (Javascript/TypeScript)")
     .parse(args);
+  program
+    .command("add <resource>")
+    .description("Generate a new MVC resource(controller,service,models,route")
+    .action(async (resource) => {
+      await generateResource(resource);
+    });
 
   const options = program.opts();
   const projectNameArgs = program.args[0];
