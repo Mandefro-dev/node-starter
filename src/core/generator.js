@@ -23,12 +23,12 @@ export async function createProject(options) {
 
     for (const templatePath of stack) {
       const folderName = path.basename(templatePath);
-      spinner.start(`Installing component: ${chalk.bold.cyan(folderName)}...`);
 
       if (!fs.existsSync(templatePath)) {
         spinner.warn(`Skipping missing template layer: ${folderName}`);
         continue;
       }
+
       spinner.start(`Applying layer: ${chalk.cyan(folderName)}...`);
 
       const files = await glob("**/*", {
@@ -36,18 +36,36 @@ export async function createProject(options) {
         nodir: true,
         dot: true,
       });
+
       for (const file of files) {
         const sourcePath = path.join(templatePath, file);
-        const destRelative = file.replace("ejs", "");
+        //TODO:fix the .ejs extension replacement error
+
+        const destRelative = file.replace(/\.ejs$/, "");
         const destPath = path.join(targetDir, destRelative);
 
-        //TODO:  to finsih tommorow
-      }
+        const isAppendable =
+          file.endsWith(".gitignore") || file.endsWith(".env");
 
-      await fs.copy(templatePath, targetDir, {
-        overwrite: true,
-        errorOnExist: false,
-      });
+        if (isAppendable && fs.existsSync(destPath)) {
+          const currentContent = await fs.readFile(destPath, "utf-8");
+          const newContent = await fs.readFile(sourcePath, "utf-8");
+          await fs.writeFile(destPath, currentContent + "\n" + newContent);
+          continue;
+        }
+
+        if (file.endsWith(".ejs")) {
+          const content = await fs.readFile(sourcePath, "utf-8");
+          const rendered = ejs.render(content, options);
+          await fs.outputFile(destPath, rendered);
+        } else {
+          //  static file, just copy
+          await fs.copy(sourcePath, destPath, {
+            overwrite: true,
+            errorOnExist: false,
+          });
+        }
+      }
 
       spinner.succeed(`Installed: ${folderName}`);
     }

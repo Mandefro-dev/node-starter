@@ -96,7 +96,7 @@ export async function promptMissingOptions(options) {
   return {
     ...options,
     projectName: options.projectName || answers.projectName,
-    language: options.language || answers.language,
+    language: options.language || answers.language, //TYPO ERROR
     pkgManager: answers.pkgManager,
     architecture: answers.architecture,
     dbType: answers.dbType,

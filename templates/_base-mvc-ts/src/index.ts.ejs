@@ -15,17 +15,17 @@ const PORT=process.env.PORT||3000
 
 const app=express()
 app.use(cors())
-app.use(express.join())
+app.use(express.json())
 
 <% if (dbType === 'MongoDB') { %>
 mongoose.connect(process.env.DB_URI as string)
-  .then(() => console.log('🟢 Connected to MongoDB'))
-  .catch(err => console.error('🔴 Mongo Error:', err));
+  .then(() => console.log(' Connected to MongoDB'))
+  .catch(err => console.error(' Mongo Error:', err));
 <% } else if (dbType === 'PostgreSQL') { %>
-// Sequelize init code would go here
-console.log('🔵 Initializing PostgreSQL connection...');
+// Sequelize init code 
+console.log(' Initializing PostgreSQL connection...');
 <% } else { %>
-console.log('⚪ No database selected.');
+console.log(' No database selected.');
 <% } %>
 
 
@@ -40,5 +40,5 @@ app.get("/",(req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log(`The server is connected to port ${PORT}`)
+    console.log(`server Connected to port ${PORT}`)
 })
