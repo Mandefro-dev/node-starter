@@ -1,6 +1,10 @@
-import express from "express"
+import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from "cors"
 import dotenv from "dotenv"
+import morgan from "morgan"
+import helmet from "helmet"
+import routes from "./routes"
+import { errorHandler } from './middleware/error.middleware';
 
 <% if(dbType==="MongoDB"){ %>
     import mongoose from "mongoose";
@@ -13,9 +17,11 @@ import dotenv from "dotenv"
 const PORT=process.env.PORT||3000
 
 
-const app=express()
+const app:Application =express()
+app.use(helmet());
 app.use(cors())
 app.use(express.json())
+app.use(morgan('dev'));
 
 <% if (dbType === 'MongoDB') { %>
 mongoose.connect(process.env.DB_URI as string)
@@ -28,8 +34,11 @@ console.log(' Initializing PostgreSQL connection...');
 console.log(' No database selected.');
 <% } %>
 
+app.use('/api/v1', routes);
 
-
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'UP', timestamp: new Date().toISOString() });
+});
 app.get("/",(req,res)=>{
 
     res.status(200).json({
@@ -37,7 +46,7 @@ app.get("/",(req,res)=>{
         environment:process.env.NODE_ENV
     })
 })
-
+app.use(errorHandler)
 
 app.listen(PORT,()=>{
     console.log(`server Connected to port ${PORT}`)
