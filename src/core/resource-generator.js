@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import ejs from "ejs";
 import chalk from "chalk";
+import { injectRoute } from "./injectRoute";
 
 export async function generateResource(name) {
   const root = process.cwd();

@@ -8,6 +8,7 @@ import path from "path";
 import { createProject } from "./core/generator.js";
 import { createEnvFile } from "./utils/env.js";
 import { installDependencies, initGit, openInEditor } from "./core/tasks.js";
+import { generateResource } from "./core/resource-generator.js";
 export async function cli(args) {
   showWelcomeBanner();
   await new Promise((r) => setTimeout(r, 500));
