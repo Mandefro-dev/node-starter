@@ -9,65 +9,92 @@ import { createProject } from "./core/generator.js";
 import { createEnvFile } from "./utils/env.js";
 import { installDependencies, initGit, openInEditor } from "./core/tasks.js";
 import { generateResource } from "./core/resource-generator.js";
+
 export async function cli(args) {
-  showWelcomeBanner();
-  await new Promise((r) => setTimeout(r, 500));
   const program = new Command();
 
   program
     .name("nodex")
     .version("1.0.0")
-    .argument("[projectName]", "name of the project")
-    .option("-t, --template <type>", "specify langauge (Javascript/TypeScript)")
-    .parse(args);
+    .description("The ultimate node.js scaffolder");
+
+  // This command handles "nodex add <name>"
   program
     .command("add <resource>")
-    .description("Generate a new MVC resource(controller,service,models,route")
+    .description(
+      "Generate a new MVC resource (controller, service, model, route)",
+    )
     .action(async (resource) => {
+      // showWelcomeBanner();
+      // Small delay for the banner to show
+      await new Promise((r) => setTimeout(r, 300));
       await generateResource(resource);
+
+      process.exit(0);
     });
 
-  const options = program.opts();
-  const projectNameArgs = program.args[0];
+  // --- CREATE PROJECT ---
 
-  let rawOptions = {
-    projectName: projectNameArgs,
-    language: options.template,
-  };
+  program
+    .argument("[projectName]", "name of the project")
+    .option("-t, --template <type>", "specify language (JavaScript/TypeScript)")
+    .action(async (projectName, options) => {
+      showWelcomeBanner();
+      await new Promise((r) => setTimeout(r, 500));
 
-  const finalOptions = await promptMissingOptions(rawOptions);
-  showPlan(finalOptions);
+      let rawOptions = {
+        projectName: projectName,
+        language: options.template,
+      };
 
-  await inquirer.prompt({
-    type: "input",
-    name: "confirm",
-    message: "Press Enter to confirm or Ctrl+C to cancel.",
-  });
-  console.log("");
-  console.log(chalk.green("Initializing construction..."));
-  const success = await createProject(finalOptions);
-  if (!success) return;
+      //user need
+      const finalOptions = await promptMissingOptions(rawOptions);
+      showPlan(finalOptions);
 
-  const targetDir = path.resolve(process.cwd(), finalOptions.projectName);
-  await createEnvFile(targetDir, finalOptions);
+      //  Confirmation
+      await inquirer.prompt({
+        type: "input",
+        name: "confirm",
+        message: "Press Enter to confirm or Ctrl+C to cancel.",
+      });
 
-  await installDependencies(targetDir, finalOptions.pkgManager);
+      console.log("");
+      console.log(chalk.green("🚀 Initializing construction..."));
 
-  if (finalOptions.git) {
-    await initGit(targetDir);
-  }
+      // Generation
+      const success = await createProject(finalOptions);
+      if (!success) return;
 
-  console.log("");
-  const rainbow = chalk.cyan("Project Ready!");
+      const targetDir = path.resolve(process.cwd(), finalOptions.projectName);
 
-  setTimeout(async () => {
-    console.log(chalk.cyan(`\nTo get started:`));
-    console.log(chalk.white(`  cd ${finalOptions.projectName}`));
-    console.log(chalk.white(`  ${finalOptions.pkgManager} run dev`));
-    console.log("");
+      // Config Phase
+      await createEnvFile(targetDir, finalOptions);
 
-    if (finalOptions.tools.includes("docker") || finalOptions.git) {
-      await openInEditor(targetDir);
-    }
-  }, 2000);
+      //  npm install & git
+      await installDependencies(targetDir, finalOptions.pkgManager);
+
+      if (finalOptions.git) {
+        await initGit(targetDir);
+      }
+
+      console.log("");
+      const rainbow = chalkAnimation.radar(" Project Ready! ");
+
+      setTimeout(async () => {
+        rainbow.stop();
+        console.log(chalk.cyan(`\nTo get started:`));
+        console.log(chalk.white(`  cd ${finalOptions.projectName}`));
+        console.log(chalk.white(`  ${finalOptions.pkgManager} run dev`));
+        console.log("");
+
+        if (
+          finalOptions.tools &&
+          (finalOptions.tools.includes("docker") || finalOptions.git)
+        ) {
+          await openInEditor(targetDir);
+        }
+      }, 2000);
+    });
+
+  program.parse(args);
 }
