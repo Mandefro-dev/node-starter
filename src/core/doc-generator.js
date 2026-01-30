@@ -20,6 +20,13 @@ export async function generateDocs() {
 
   for (const sourceFile of sourceFile) {
     if (sourceFile.getBaseName() === "index.ts") continue;
+
+    const resourceName = sourceFile
+      .getBaseName()
+      .replace("routes.ts", "")
+      .replace(".ts", "");
+    const tag = resourceName.charAt(0).toUpperCase() + resourceName.slice(1);
+    sourceFile.forEachDescendant((node) => {});
   }
 }
 
