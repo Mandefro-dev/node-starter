@@ -9,6 +9,7 @@ import { createProject } from "./core/generator.js";
 import { createEnvFile } from "./utils/env.js";
 import { installDependencies, initGit, openInEditor } from "./core/tasks.js";
 import { generateResource } from "./core/resource-generator.js";
+import { generateDocs } from "./core/doc-generator.js";
 
 export async function cli(args) {
   const program = new Command();
@@ -33,6 +34,12 @@ export async function cli(args) {
       process.exit(0);
     });
 
+  program
+    .command("doc")
+    .description("Auto-generate Swagger documentation from code")
+    .action(async () => {
+      await generateDocs();
+    });
   // --- CREATE PROJECT ---
 
   program

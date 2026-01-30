@@ -58,7 +58,7 @@ async function injectRoute(naming) {
   if (!fs.existsSync(indexPath)) {
     console.warn(
       chalk.yellow(
-        "\n⚠️  src/routes/index.ts not found. Skipping auto-injection.",
+        "\n  src/routes/index.ts not found. Skipping auto-injection.",
       ),
     );
     return;
@@ -66,7 +66,7 @@ async function injectRoute(naming) {
 
   let content = await fs.readFile(indexPath, "utf-8");
 
-  // Logic: Add import at top, add router.use before export
+  // Add import at top, add router.use before export
   const importLine = `import ${naming.lower}Routes from './${naming.lower}.routes';`;
   const useLine = `router.use('/${naming.lower}s', ${naming.lower}Routes);`;
 
@@ -77,12 +77,12 @@ async function injectRoute(naming) {
 
   // Very simple string injection
   const lines = content.split("\n");
-  lines.unshift(importLine); // Add import to top
+  lines.unshift(importLine);
 
   const exportIndex = lines.findIndex((line) =>
     line.includes("export default"),
   );
-  lines.splice(exportIndex, 0, useLine); // Add useLine right before export
+  lines.splice(exportIndex, 0, useLine);
 
   await fs.writeFile(indexPath, lines.join("\n"));
   console.log(`${chalk.cyan("  UPDATE")} src/routes/index.ts (Route Injected)`);
