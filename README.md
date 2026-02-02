@@ -26,4 +26,91 @@ Install `nodex` globally using npm:
 
 ```bash
 npm install -g nodex
+Note: Ensure you have Node.js v14+ installed)
 
+⚡ Quick Start
+1. Create a New Project
+Run the command and follow the interactive wizard to choose your database and tools.
+
+Bash
+nodex my-awesome-api
+2. Start Development
+Bash
+cd my-awesome-api
+npm run dev
+🛠️ Advanced Usage
+➕ The add Command (Sub-Generators)
+Stop creating files manually. When you need a new feature (e.g., a "Product" module), just run:
+
+Bash
+nodex add product
+What happens automatically?
+
+✅ Creates src/controllers/product.controller.ts
+
+✅ Creates src/services/product.service.ts
+
+✅ Creates src/models/product.model.ts
+
+✅ Creates src/routes/product.routes.ts
+
+🪄 Injects the new route into src/routes/index.ts so it works instantly.
+
+📝 The doc Command (Auto-Docs)
+Don't waste time writing YAML for Swagger. nodex analyzes your route definitions and generates the docs for you.
+
+Bash
+nodex doc
+Outputs:
+
+docs/swagger.json (OpenAPI Spec)
+
+docs/postman_collection.json (Ready to import into Postman)
+
+📂 Generated Structure
+Your project is organized for scalability from Day 1:
+
+Plaintext
+my-project/
+├── src/
+│   ├── config/         # Database & Env connections
+│   ├── controllers/    # Handles HTTP requests
+│   ├── middleware/     # Error handling, Auth, Validation
+│   ├── models/         # Database schemas (Mongoose/Sequelize)
+│   ├── routes/         # API route definitions
+│   ├── services/       # Business logic (DB abstraction)
+│   ├── utils/          # Logger, Helpers
+│   └── app.ts          # Express App setup
+├── docs/               # Auto-generated Swagger/Postman files
+├── tests/              # Jest setup
+├── .env.example        # Environment variables template
+├── docker-compose.yml  # Container setup
+└── package.json
+🗺️ Roadmap
+We are constantly evolving nodex to be the standard for Node.js development.
+
+[x] v1.0.0: MVC Scaffolding, TypeScript support, DB Generators.
+
+[ ] v1.1.0: nodex sync (Generate Frontend Types from Backend Models).
+
+[ ] v1.2.0: Cloud Deployment Scripts (AWS/DigitalOcean).
+
+[ ] v1.3.0: nodex check (Local environment health monitor).
+
+🤝 Contributing
+We love contributions! If you have an idea for a template or a feature:
+
+Fork the repo.
+
+Create your feature branch (git checkout -b feature/amazing-feature).
+
+Commit your changes.
+
+Push to the branch.
+
+Open a Pull Request.
+
+📄 License
+Distributed under the MIT License. See LICENSE for more information.
+
+<p align="center">Made with ❤️ for the Node.js Community</p>
