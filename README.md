@@ -1,28 +1,28 @@
-nodex  
-The Node.js Backend Scaffolder
-Stop writing boilerplate.
-nodex is a CLI tool that generates production-ready Node.js backend architectures in seconds. It doesn't just create files; it builds a "Brain" for your application with best practices, security, and scalability baked in.
-Quick StartInstall it globally via npm:Bashnpm install -g nodex-cli
-Generate your first project:Bashnodex my-awesome-api
-Follow the interactive prompts to choose your stack (MongoDB/Postgres, Docker, Auth, etc.), and watch it build.
-Key Features🏗️ Production-Ready ArchitectureForget index.js spaghetti code. nodex generates a clean TypeScript MVC structure:Controllers for HTTP logic.Services for Business logic.Models for Database schemas.Middleware for Error handling & Validation.
-➕ The "Add" Command (Sub-Generators)Need a new feature? Don't create 4 files manually.Bashcd my-awesome-api
+#  nodex
+> **The Ultimate Node.js Backend Scaffolder**
 
-nodex add product
-What happens?✅ Creates src/controllers/product.controller.ts✅ Creates src/services/product.service.ts✅ Creates src/models/product.model.ts✅ Creates src/routes/product.routes.ts✅ Auto-injects the new route into src/routes/index.ts!
-📚 Auto-Documentation (Magic)Hate writing Swagger docs? Us too.Bashnodex doc
-nodex scans your source code, detects your routes and methods, and automatically generates:Swagger/OpenAPI JSON (docs/swagger.json)Postman Collection (docs/postman_collection.json)🛠️ CommandsCommandDescriptionnodex <name>Scaffolds a new project with interactive setup.nodex add <resource>Generates a Controller, Service, Model, and Route for a resource (e.g., user).nodex docReverse-engineers your code to generate Swagger & Postman files.nodex --helpShows the full list of options.
-📂 Project StructureYour generated project will look like this professional standard:Plaintextmy-app/
-├── src/
-│ ├── config/ # DB & Env setup
-│ ├── controllers/ # Request/Response logic
-│ ├── middleware/ # Error handlers, Auth checks
-│ ├── models/ # Database Schemas
-│ ├── routes/ # Route definitions
-│ ├── services/ # Business logic
-│ ├── utils/ # Logger, Helpers
-│ └── app.ts # App entry point
-├── tests/ # Jest tests
-├── .env.example # Environment variables
-├── docker-compose.yml # (Optional) Docker setup
-└── package.json
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6.svg?style=flat-square&logo=typescript&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
+
+**Stop writing boilerplate.** `nodex` is a powerful CLI tool designed to generate production-ready Node.js backend architectures in seconds. It goes beyond simple file generation—it acts as your "Assistant Architect," helping you scaffold projects, generate resources, and automate documentation.
+
+---
+
+## ✨ Features
+
+- **🏗️ Professional Architecture**: Instantly sets up a **TypeScript MVC** structure (Controllers, Services, Models).
+- **🔌 Batteries Included**: Configurable support for **MongoDB** or **PostgreSQL**, **Docker**, and **JWT Auth**.
+- **🚀 The "Add" Command**: Generate new resources (Controller + Service + Route + Model) with a single command.
+- **📚 Auto-Documentation**: Reverse-engineer your code to generate **Swagger** and **Postman** files automatically via `nodex doc`.
+- **⚙️ Zero Config**: Handles `npm install`, `git init`, and `.env` creation for you.
+
+---
+
+## 📦 Installation
+
+Install `nodex` globally using npm:
+
+```bash
+npm install -g nodex-cli
