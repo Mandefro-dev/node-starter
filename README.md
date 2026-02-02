@@ -25,4 +25,5 @@
 Install `nodex` globally using npm:
 
 ```bash
-npm install -g nodex-cli
+npm install -g nodex
+
