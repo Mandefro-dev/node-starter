@@ -25,7 +25,7 @@
 Install `nodex` globally using npm:
 
 ```bash
-npm install -g nodex
+npm install -g @mandedev/nodex
 Note: Ensure you have Node.js v14+ installed)
 
 ⚡ Quick Start
