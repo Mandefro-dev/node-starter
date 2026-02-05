@@ -1,10 +1,18 @@
 {
-  "name": "nodex",
-  "version": "1.0.0",
-  "description": "\"# nodex\"",
+  "name": "@mandedev/nodex",
+  "version": "1.0.1",
+  "description": "The ultimate node.js scaffolder",
   "main": "index.js",
   "bin": {
-    "nodex": "./index.js"
+    "nodex": "index.js"
+  },
+  "files": [
+    "src",
+    "templates",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,9 +22,12 @@
     "url": "git+https://github.com/Mandefro-dev/node-starter.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mande",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "bugs": {
     "url": "https://github.com/Mandefro-dev/node-starter/issues"
   },
