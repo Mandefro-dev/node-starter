@@ -1,146 +1,119 @@
-# 🚀 nodex
+<div align="center">
+  <img src="https://img.icons8.com/fluency/96/000000/node-js.png" alt="nodex-logo" width="80" />
 
-> **The Ultimate Node.js Backend Scaffolder**
+  <h1>🚀 nodex</h1>
 
-![npm version](https://img.shields.io/npm/v/@mandedev/nodex.svg?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
-![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6.svg?style=flat-square&logo=typescript&logoColor=white)
-![Downloads](https://img.shields.io/npm/dt/@mandedev/nodex.svg?style=flat-square)
+  <p>
+    <b>The Ultimate Node.js Backend Scaffolder</b><br />
+    <i>Stop writing boilerplate. Start building features.</i>
+  </p>
 
-**Stop writing boilerplate. Start building features.**  
-Generate production-ready, scalable Node.js backends in seconds.
+  <div>
+    <img src="https://img.shields.io/npm/v/@mandedev/nodex?style=flat-square&color=CB3837&logo=npm" alt="npm version" />
+    <img src="https://img.shields.io/badge/TypeScript-Ready-3178C6?style=flat-square&logo=typescript" alt="typescript" />
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="license" />
+    <img src="https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg?style=flat-square" alt="maintained" />
+  </div>
 
-🔗 [Report Bug](https://github.com/mandedev/nodex/issues) · [Request Feature](https://github.com/mandedev/nodex/issues)
+  <br />
 
----
+  <p>
+    <a href="#-installation">Installation</a> •
+    <a href="#-quick-start">Quick Start</a> •
+    <a href="#-magic-commands">Magic Commands</a> •
+    <a href="#-roadmap">Roadmap</a>
+  </p>
+</div>
 
-## ⚡ Why nodex?
+<hr />
 
-Setting up a backend usually means:
+<h3>⚡ Why nodex?</h3>
+<p>
+  Setting up a backend usually means folder structure headaches, repeated boilerplate, and manual configs. 
+  <b>nodex</b> automates the mundane so you can focus on your business logic.
+</p>
 
-- folder structure headaches
-- repeated boilerplate
-- manual configs
-- copy-paste fatigue 😵‍💫
+<table>
+  <tr>
+    <td><b>🏗️ MVC Architecture</b></td>
+    <td>Clean separation of Controllers, Services, Models, and Routes.</td>
+  </tr>
+  <tr>
+    <td><b>📘 TypeScript First</b></td>
+    <td>Strict typing and best-practice TS configs out of the box.</td>
+  </tr>
+  <tr>
+    <td><b>✨ Resource Generator</b></td>
+    <td>Generate full CRUD resources with a single command.</td>
+  </tr>
+  <tr>
+    <td><b>📝 Auto Documentation</b></td>
+    <td>Swagger & Postman docs generated directly from your routes.</td>
+  </tr>
+</table>
 
-**nodex** automates all of that so you can focus on what actually matters — **features**.
+<hr />
 
----
+<h3 id="-installation">📦 Installation</h3>
 
-## 🛠️ Core Capabilities
+<p>Recommended (Run instantly via npx):</p>
+<pre><code>npx @mandedev/nodex &lt;project-name&gt;</code></pre>
 
-- 🏗️ **MVC Architecture**  
-  Clean separation of Controllers, Services, Models, and Routes.
+<p>Optional (Global Install):</p>
+<pre><code>npm install -g @mandedev/nodex</code></pre>
 
-- 📘 **TypeScript First**  
-  Strict typing, interfaces, and best-practice TS config out of the box.
+<hr />
 
-- ✨ **Resource Generator (`add`)**  
-  Generate full CRUD resources in one command.
+<h3 id="-quick-start">🚀 Quick Start</h3>
 
-- 📝 **Auto Documentation**  
-  Swagger & Postman docs generated directly from your routes.
+<p><b>1. Initialize your project</b></p>
+<pre><code>npx @mandedev/nodex my-awesome-api</code></pre>
 
-- 🔌 **Batteries Included**  
-  MongoDB, PostgreSQL, JWT Auth, Docker, Validation — ready to use.
+<p><b>2. Start the engine</b></p>
+<pre><code>cd my-awesome-api
+npm run dev</code></pre>
 
----
+<blockquote>
+  <p>💡 Server runs at <code>http://localhost:3000</code> with Hot Reloading enabled.</p>
+</blockquote>
 
-## 📦 Installation
+<hr />
 
-### Recommended (no global install)
+<h3 id="-magic-commands">🛠️ Magic Commands</h3>
 
-Run the latest version instantly using `npx`:
+<h4>➕ Generate Resources</h4>
+<p>Instantly scaffold a full feature module:</p>
+<pre><code>nodex add product</code></pre>
 
-```bash
-npx @mandedev/nodex <project-name>
-Optional: Global Install
-If you want the nodex command available everywhere:
+<ul>
+  <li>✅ <b>Controller:</b> <code>src/controllers/product.controller.ts</code></li>
+  <li>✅ <b>Service:</b> <code>src/services/product.service.ts</code></li>
+  <li>✅ <b>Model:</b> <code>src/models/product.model.ts</code></li>
+  <li>✅ <b>Route:</b> <code>src/routes/product.routes.ts</code></li>
+  <li>🪄 <b>Auto Injection:</b> Routes are automatically registered.</li>
+</ul>
 
-npm install -g @mandedev/nodex
-🚀 Quick Start
-1️⃣ Initialize a Project
-npx @mandedev/nodex my-awesome-api
-Follow the interactive wizard and choose your preferred stack.
+<h4>📚 Documentation</h4>
+<pre><code>nodex doc</code></pre>
+<p>Generates <code>swagger.json</code> and <code>postman_collection.json</code> in the <code>/docs</code> folder.</p>
 
-2️⃣ Start Developing
-cd my-awesome-api
-npm run dev
-Your server will start at:
+<hr />
 
-http://localhost:3000
-🔥 Hot reloading enabled by default.
+<h3 id="-roadmap">🗺️ Roadmap</h3>
 
-🛠️ Magic Commands
-➕ Generate Resources
-Instead of creating multiple files manually, just run:
+<ul>
+  <li>[x] <b>v1.0.0</b> – MVC scaffolding, TypeScript, MongoDB/Postgres</li>
+  <li>[ ] <b>v1.1.0</b> – Resource generator (nodex add)</li>
+  <li>[ ] <b>v1.2.0</b> – Frontend type sync (React / Vue)</li>
+  <li>[ ] <b>v1.3.0</b> – Cloud deployment scripts</li>
+</ul>
 
-nodex add product
-This command automatically generates:
+<hr />
 
-src/controllers/product.controller.ts
-
-src/services/product.service.ts
-
-src/models/product.model.ts
-
-src/routes/product.routes.ts
-
-🪄 Auto Injection
-The new route is automatically registered in the main router.
-
-📚 Generate API Documentation
-Forget writing Swagger YAML files.
-
-nodex doc
-Generated files:
-
-docs/swagger.json
-docs/postman_collection.json
-Ready to use instantly.
-
-📂 Project Structure
-my-app/
-├── src/
-│   ├── config/         # Database & environment configuration
-│   ├── controllers/    # Request handlers
-│   ├── middleware/     # Auth, validation, error handling
-│   ├── models/         # Database schemas
-│   ├── routes/         # API route definitions
-│   ├── services/       # Business logic
-│   ├── utils/          # Helpers & utilities
-│   └── app.ts          # Application entry point
-├── tests/              # Jest unit & integration tests
-├── .env.example        # Environment variable template
-├── docker-compose.yml  # Docker configuration
-└── package.json
-🗺️ Roadmap
- v1.0.0 – MVC scaffolding, TypeScript, MongoDB/Postgres
-
- v1.1.0 – Resource generator (nodex add)
-
- v1.2.0 – Frontend type sync (React / Vue)
-
- v1.3.0 – Cloud deployment scripts (AWS / DigitalOcean)
-
-🤝 Contributing
-Contributions are welcome and appreciated ❤️
-
-Fork the repository
-
-Create your feature branch
-
-git checkout -b feature/NewFeature
-Commit your changes
-
-git commit -m "Add NewFeature"
-Push to your branch
-
-Open a Pull Request 🚀
-
-📄 License
-Distributed under the MIT License.
-See the LICENSE file for more information.
-
-Built with ❤️ by mandedev
-```
+<div align="center">
+  <p>Built with ❤️ by <b>mandedev</b></p>
+  <p>
+    <a href="https://github.com/mandedev/nodex/issues">Report Bug</a> •
+    <a href="https://github.com/mandedev/nodex/issues">Request Feature</a>
+  </p>
+</div>
